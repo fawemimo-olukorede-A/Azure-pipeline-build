@@ -12,8 +12,7 @@ jobs:
     steps:
       # Checkout the repository
       - name: Checkout code
-        uses: actions/checkout@v3
-
+        uses: actions/checkout@v
 
       # Log in to Docker Hub
       - name: Log in to Docker Hub
@@ -26,6 +25,9 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: .
+          context: .                 # Adjust this if your Dockerfile is in a different directory
+          file: ./Dockerfile         # Specify the relative path to your Dockerfile if not in the root
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/python-app:latest # Change the tag as needed
+
+
